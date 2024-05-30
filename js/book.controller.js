@@ -5,12 +5,7 @@ function onInit() {
 }
 
 function renderBooks() {
-    var booksHTML = `<tr>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>`
-    booksHTML += gBooks.map(book =>
+    const booksHTML = gBooks.map(book =>
         `<tr>
             <td>${book.title}</td>
             <td class="price">${book.price}</td>
@@ -21,8 +16,8 @@ function renderBooks() {
             </td>
         </tr>`
     ).join('')
-    const elBooksTable = document.querySelector('table.books tbody')
-    elBooksTable.innerHTML = booksHTML
+    const elBooksTableBody = document.querySelector('table.books tbody')
+    elBooksTableBody.innerHTML = booksHTML
 }
 
 function onRemoveBook(id) {
