@@ -4,8 +4,8 @@
 
 var gBooks = getBooks()
 
-function getBooks(){
-    return  [
+function getBooks() {
+    return [
         {
             id: 'bg4J78',
             title: 'The adventures of Lori Ipsi',
@@ -27,7 +27,18 @@ function getBooks(){
     ]
 }
 
-function removeBook(id){
-    const idx = gBooks.findIndex(book=>book.id===id)
-    gBooks.splice(idx,1)
+function removeBook(id) {
+    const idx = gBooks.findIndex(book => book.id === id)
+    gBooks.splice(idx, 1)
+}
+
+function updatePrice(id, price) {
+    const book = getBookById(id)
+    book.price = price
+}
+
+function getBookById(id) {
+    const book = gBooks.find(book => book.id === id)
+    if (!book) return null
+    return book
 }
