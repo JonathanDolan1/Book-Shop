@@ -96,6 +96,13 @@ button {
     background-color: rgb(236 128 35);
 }
 
+.success-message{
+    padding-block: 10px;
+    padding-inline-start: 3px;
+    opacity: 0;
+    transition: 1s;
+}
+
 pre {
     display: flex;
     flex-direction: column;

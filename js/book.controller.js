@@ -24,13 +24,10 @@ function renderBooks() {
 }
 
 function onRemoveBook(id) {
+    const title = getBookById(id).title
     removeBook(id)
     renderBooks()
-}
-
-function onRemoveBook(id) {
-    removeBook(id)
-    renderBooks()
+    showSuccessMessage(title, 'Removed')
 }
 
 function onUpdateBook(id) {
@@ -41,6 +38,7 @@ function onUpdateBook(id) {
     }
     updatePrice(id, price)
     renderBooks()
+    showSuccessMessage(getBookById(id).title, 'Updated')
 }
 
 function onAddBook() {
@@ -50,15 +48,16 @@ function onAddBook() {
         if (!isNaN(price)) break
         alert('Please enter only numbers')
     }
-    addBook(title, price)
+    const book = addBook(title, price)
     renderBooks()
+    showSuccessMessage(book.title, 'Added')
 }
 
 function onShowDetails(id) {
     const elModal = document.querySelector('.modal')
     const elData = elModal.querySelector('pre')
     const book = getBookById(id)
-    const strHTML = `<img src="img/${book.imgUrl}">
+    const strHTML = `<img src="img/${book.imgUrl}" alt="Image of ${book.title}">
     <span>Title: ${book.title}</span>
     <span>Price: ${book.price}</span>`
     elData.innerHTML = strHTML
@@ -75,4 +74,14 @@ function onClearSearch() {
     const elInput = document.querySelector('input')
     elInput.value = ''
     renderBooks()
+}
+
+function showSuccessMessage(title, action) {
+    const elSuccessMessage = document.querySelector('.success-message')
+    const elTitleSpan = elSuccessMessage.querySelector('span')
+    const elActionSpan = elSuccessMessage.querySelector('span:nth-child(2)')
+    elTitleSpan.innerText = title
+    elActionSpan.innerText = action
+    elSuccessMessage.style.opacity = 1
+    setTimeout(() => elSuccessMessage.style.opacity = 0, 2000)
 }

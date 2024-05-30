@@ -32,6 +32,7 @@ function addBook(title, price) {
     const book = _createBook(title, price)
     gBooks.unshift(book)
     _saveBooks()
+    return book
 }
 
 function getBookImgUrlById(id) {
