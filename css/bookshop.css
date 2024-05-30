@@ -13,13 +13,20 @@ footer {
     display: flex;
     align-items: center;
     height: 5vh;
-
     padding-inline: 10px;
     background-color: lightgreen;
 }
 
 header {
     margin-block-end: .5rem;
+}
+
+footer {
+    justify-content: space-between;
+}
+
+footer span span {
+    margin-inline: 0.2em;
 }
 
 main {
@@ -30,8 +37,10 @@ main {
 
 .top-display{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    padding: 0.3em;
+    background-color: aqua;
 }
 
 .top-display .search {

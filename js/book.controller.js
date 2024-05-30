@@ -21,6 +21,7 @@ function renderBooks() {
     ).join('')
     const elBooksTableBody = document.querySelector('table.books tbody')
     elBooksTableBody.innerHTML = booksHTML
+    renderStats()
 }
 
 function onRemoveBook(id) {
@@ -28,29 +29,36 @@ function onRemoveBook(id) {
     removeBook(id)
     renderBooks()
     showSuccessMessage(title, 'Removed')
+    renderStats()
 }
 
 function onUpdateBook(id) {
-    while (true) {
-        var price = +prompt('Enter an updated price')
-        if (!isNaN(price)) break
-        alert('Please enter only numbers')
+    const price = +prompt('Enter an updated price')
+    if (isNaN(price) || price === 0) {
+        alert('Cannot add a book with no price, notice to enter only numbers')
+        return
     }
     updatePrice(id, price)
     renderBooks()
     showSuccessMessage(getBookById(id).title, 'Updated')
+    renderStats()
 }
 
 function onAddBook() {
     const title = prompt('Enter the book\'s title')
-    while (true) {
-        var price = +prompt('Enter a price')
-        if (!isNaN(price)) break
-        alert('Please enter only numbers')
+    if (title === '') {
+        alert('Cannot add a book with no title')
+        return
     }
-    const book = addBook(title, price)
+    const price = +prompt('Enter a price')
+    if (isNaN(price) || price === 0) {
+        alert('Cannot add a book with no price, notice to enter only numbers')
+        return
+    }
+    const book = addBook(title, +price)
     renderBooks()
     showSuccessMessage(book.title, 'Added')
+    renderStats()
 }
 
 function onShowDetails(id) {
@@ -84,4 +92,13 @@ function showSuccessMessage(title, action) {
     elActionSpan.innerText = action
     elSuccessMessage.style.opacity = 1
     setTimeout(() => elSuccessMessage.style.opacity = 0, 2000)
+}
+
+function renderStats(){
+    const elExpensive = document.querySelector('.expensive')
+    const elAverage = document.querySelector('.average')
+    const elCheap = document.querySelector('.cheap')
+    elExpensive.innerText = getTotalExpensiveBooks()
+    elAverage.innerText = getTotalAverageBooks()
+    elCheap.innerText = getTotalCheapBooks()
 }

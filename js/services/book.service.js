@@ -78,3 +78,15 @@ function _createBook(title, price) {
 function _saveBooks(){
     saveToStorage('books',gBooks)
 }
+
+function getTotalExpensiveBooks(){
+    return gBooks.filter(book => book.price>200).length
+}
+
+function getTotalAverageBooks(){
+    return gBooks.filter(book => book.price>=80).length - getTotalExpensiveBooks()
+}
+
+function getTotalCheapBooks(){
+    return gBooks.length - getTotalExpensiveBooks() - getTotalAverageBooks()
+}
