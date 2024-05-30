@@ -3,9 +3,45 @@
 'use strict'
 
 var gBooks = getBooks()
+_createBooks()
 
 function getBooks() {
-    return [
+    return gBooks
+}
+
+function removeBook(id) {
+    const idx = gBooks.findIndex(book => book.id === id)
+    gBooks.splice(idx, 1)
+    _saveBooks()
+}
+
+function updatePrice(id, price) {
+    const book = getBookById(id)
+    book.price = price
+    _saveBooks()
+}
+
+function getBookById(id) {
+    const book = gBooks.find(book => book.id === id)
+    if (!book) return null
+    return book
+}
+
+function addBook(title, price) {
+    const book = _createBook(title, price)
+    gBooks.unshift(book)
+    _saveBooks()
+}
+
+function getBookImgUrlById(id) {
+    return getBookById(id).imgUrl 
+}
+
+function _createBooks() {
+    gBooks = loadFromStorage('books')
+    if (gBooks && gBooks.length !== 0) return
+
+    gBooks = [
         {
             id: 'bg4J78',
             title: 'The adventures of Lori Ipsi',
@@ -25,31 +61,7 @@ function getBooks() {
             imgUrl: 'zorba.jpg'
         }
     ]
-}
-
-function removeBook(id) {
-    const idx = gBooks.findIndex(book => book.id === id)
-    gBooks.splice(idx, 1)
-}
-
-function updatePrice(id, price) {
-    const book = getBookById(id)
-    book.price = price
-}
-
-function getBookById(id) {
-    const book = gBooks.find(book => book.id === id)
-    if (!book) return null
-    return book
-}
-
-function addBook(title, price) {
-    const book = _createBook(title, price)
-    gBooks.unshift(book)
-}
-
-function getBookImgUrlById(id) {
-    return getBookById(id).imgUrl 
+    _saveBooks()
 }
 
 function _createBook(title, price) {
@@ -59,4 +71,8 @@ function _createBook(title, price) {
         price,
         imgUrl: `${title}.jpg`
     }
+}
+
+function _saveBooks(){
+    saveToStorage('books',gBooks)
 }
