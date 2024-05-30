@@ -15,7 +15,7 @@ function renderBooks() {
             <td>${book.title}</td>
             <td class="price">${book.price}</td>
             <td class="actions">
-                <button class="read">Read</button>
+                <button class="read" onclick="onShowDetails('${book.id}')">Read</button>
                 <button class="update" onclick="onUpdateBook('${book.id}')">Update</button>
                 <button class="delete" onclick="onRemoveBook('${book.id}')">Delete</button>
             </td>
@@ -54,4 +54,12 @@ function onAddBook(){
     }
     addBook(title,price)
     renderBooks()
+}
+
+function onShowDetails(id) {
+    const elModal = document.querySelector('.modal')
+    const elData = elModal.querySelector('pre')
+    const book = getBookById(id)
+    elData.innerText = JSON.stringify(book, null, 2)
+    elModal.showModal()
 }
