@@ -17,10 +17,15 @@ function renderBooks() {
             <td class="actions">
                 <button class="read">Read</button>
                 <button class="update">Update</button>
-                <button class="delete">Delete</button>
+                <button class="delete" onclick="onRemoveBook('${book.id}')">Delete</button>
             </td>
         </tr>`
     ).join('')
     const elBooksTable = document.querySelector('table.books tbody')
     elBooksTable.innerHTML = booksHTML
+}
+
+function onRemoveBook(id){
+    removeBook(id)
+    renderBooks()
 }
