@@ -48,6 +48,10 @@ function addBook(title, price) {
     gBooks.unshift(book)
 }
 
+function getBookImgUrlById(id) {
+    return getBookById(id).imgUrl 
+}
+
 function _createBook(title, price) {
     return {
         id: makeId(6),
@@ -56,4 +60,3 @@ function _createBook(title, price) {
         imgUrl: `${title}.jpg`
     }
 }
-
