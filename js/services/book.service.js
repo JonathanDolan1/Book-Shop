@@ -42,3 +42,18 @@ function getBookById(id) {
     if (!book) return null
     return book
 }
+
+function addBook(title, price) {
+    const book = _createBook(title, price)
+    gBooks.unshift(book)
+}
+
+function _createBook(title, price) {
+    return {
+        id: makeId(6),
+        title,
+        price,
+        imgUrl: `${title}.jpg`
+    }
+}
+

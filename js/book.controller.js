@@ -44,3 +44,14 @@ function onUpdateBook(id) {
     updatePrice(id, price)
     renderBooks()
 }
+
+function onAddBook(){
+    const title = prompt('Enter the book\'s title')
+    while (true) {
+        var price = +prompt('Enter an updated price')
+        if (!isNaN(price)) break
+        alert('Please enter only numbers')
+    }
+    addBook(title,price)
+    renderBooks()
+}
