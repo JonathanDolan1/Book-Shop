@@ -14,7 +14,13 @@
     </header>
 
     <main>
-        <button onclick="onAddBook()">Add book</button>
+        <div class="top-display">
+            <section class="search">
+                <input type="text" placeholder="Search" oninput="onFilterBooks(this)">
+                <button onclick="onClearSearch()">Clear</button>
+            </section>
+            <button onclick="onAddBook()">Add book</button>
+        </div>
 
         <table class="books">
             <thead>

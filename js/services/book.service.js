@@ -2,11 +2,12 @@
 
 'use strict'
 
-var gBooks = getBooks()
+var gBooks
 _createBooks()
 
 function getBooks() {
-    return gBooks
+    if (!gFilterBy) return gBooks
+    return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.toLowerCase()))
 }
 
 function removeBook(id) {

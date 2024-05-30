@@ -1,11 +1,14 @@
 'use strict'
 
+var gFilterBy = ''
+
 function onInit() {
     renderBooks()
 }
 
 function renderBooks() {
-    const booksHTML = gBooks.map(book =>
+    const books = getBooks()
+    const booksHTML = books.map(book =>
         `<tr>
             <td>${book.title}</td>
             <td class="price">${book.price}</td>
@@ -40,14 +43,14 @@ function onUpdateBook(id) {
     renderBooks()
 }
 
-function onAddBook(){
+function onAddBook() {
     const title = prompt('Enter the book\'s title')
     while (true) {
-        var price = +prompt('Enter an updated price')
+        var price = +prompt('Enter a price')
         if (!isNaN(price)) break
         alert('Please enter only numbers')
     }
-    addBook(title,price)
+    addBook(title, price)
     renderBooks()
 }
 
@@ -60,4 +63,16 @@ function onShowDetails(id) {
     <span>Price: ${book.price}</span>`
     elData.innerHTML = strHTML
     elModal.showModal()
+}
+
+function onFilterBooks(elInput) {
+    gFilterBy = elInput.value
+    renderBooks()
+}
+
+function onClearSearch() {
+    gFilterBy = ''
+    const elInput = document.querySelector('input')
+    elInput.value = ''
+    renderBooks()
 }

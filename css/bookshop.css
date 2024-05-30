@@ -28,6 +28,21 @@ main {
     min-height: calc(100vh - 10vh - 1rem);
 }
 
+.top-display{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-display .search {
+    display: flex;
+    flex-grow: 1;
+}
+
+input {
+    flex-grow: 1;
+}
+
 .books{
     margin-block-start: 10px;
 }
